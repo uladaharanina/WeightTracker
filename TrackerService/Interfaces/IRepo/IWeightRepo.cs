@@ -1,9 +1,11 @@
 using TrackerService.Models;
-
-public class IWeightRepo
+namespace TrackerService.Interfaces;
+public interface IWeightRepo
 {
-    public Task<List<WeightEntry>> GetWeightEntries();
-    public Task<WeightEntry> GetWeightById(int id);
-    public Task<WeightEntry> DeleteWeightEntry();
+    public Task<List<WeightEntry>?> GetWeightEntries();
+    public Task<WeightEntry?> GetWeightById(int id);
+    public Task<WeightEntry?> AddNewWeightEntry(WeightEntry entry);
+    public Task<WeightEntry?> UpdateWeightEntry(WeightEntry entry);
+    public Task<string> DeleteWeightEntry(WeightEntry entry);
 
 }

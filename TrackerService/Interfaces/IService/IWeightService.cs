@@ -1,3 +1,5 @@
+namespace TrackerService.Interfaces;
+
 using TrackerService.Models;
 public interface IWeightService
 {

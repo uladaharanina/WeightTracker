@@ -1,8 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using TrackerService.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<WeightContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionSring"));
+});
 
 var app = builder.Build();
 
@@ -15,5 +23,4 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/", () => "Hello World!");
 app.Run();
