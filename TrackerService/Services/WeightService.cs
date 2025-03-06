@@ -3,17 +3,41 @@ using TrackerService.Interfaces;
 
 public class WeightService : IWeightService
 {
-    public Task<List<WeightEntry>> GetWeights()
+    private readonly IWeightRepo _weightRepo;
+
+    public WeightService(IWeightRepo weightRepo)
     {
-        throw new NotImplementedException();
+        _weightRepo = weightRepo;
+    }
+    public async Task<List<WeightEntry>?> GetWeights()
+    {
+        List<WeightEntry>? entries = await _weightRepo.GetWeightEntries();
+        if (entries == null)
+        {
+            return null;
+        }
+        return entries;
     }
     public Task<WeightEntry> GetWeightById(int id)
     {
         throw new NotImplementedException();
     }
-    public Task<WeightEntry> AddWeight(WeightEntry weightEntry)
+    public async Task<WeightEntry?> AddWeight(WeightEntry weightEntry)
     {
-        throw new NotImplementedException();
+        if (weightEntry.Weight > 0)
+        {
+            // Save to database
+            WeightEntry? entry = await _weightRepo.AddNewWeightEntry(weightEntry);
+            if (entry != null)
+            {
+                return entry;
+            }
+            return null;
+        }
+        else
+        {
+            throw new Exception("Weight is required.");
+        }
     }
     public Task<string> UpdateWeight(WeightEntry weightEntry)
     {
