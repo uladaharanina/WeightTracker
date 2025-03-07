@@ -10,6 +10,6 @@ public class WeightEntry
     public DateTime Date { get; set; }
 
     [Required]
-    public decimal Weight { get; set; }
+    public double Weight { get; set; }
     public string? Comment { get; set; }
 }
