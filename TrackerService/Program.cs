@@ -28,5 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapGet("/", () => "Test Me");
 app.MapControllers();
 app.Run();

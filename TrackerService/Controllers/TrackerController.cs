@@ -15,11 +15,11 @@ public class TrackerController : ControllerBase
     }
     [HttpGet]
     [Route("api/weights")]
-    public ActionResult<List<WeightEntry>> GetWeights()
+    public async Task<ActionResult<List<WeightEntry?>>> GetWeights()
     {
         try
         {
-            List<WeightEntry> weights = _weightService.GetWeights().Result;
+            List<WeightEntry>? weights = await _weightService.GetWeights();
             return Ok(weights);
         }
         catch (Exception ex)
