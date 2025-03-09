@@ -8,10 +8,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
+var localConnectionString = builder.Configuration.GetConnectionString("ConnectionString");
 
+builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddDbContext<WeightContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"));
+    options.UseSqlServer(connectionString);
 });
 
 builder.Services.AddScoped<IWeightRepo, WeightRepo>();

@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+COPY TrackerService/. ./TrackerService/
+RUN dotnet restore TrackerService/TrackerService.csproj
+RUN dotnet publish TrackerService/TrackerService.csproj -o /out
+
+# Step 2:Tests
+COPY TrackerService.Tests/ ./TrackerService.Tests/
+RUN dotnet restore TrackerService.Tests/TrackerService.Tests.csproj
+
+RUN dotnet build TrackerService.Tests/TrackerService.Tests.csproj
+
+RUN dotnet test TrackerService.Tests/TrackerService.Tests.csproj --no-build --logger:trx
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app/TrackerService
+COPY --from=build /out .
+ENTRYPOINT ["dotnet", "TrackerService.dll"]
+

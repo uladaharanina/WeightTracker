@@ -9,14 +9,20 @@ public class WeightService : IWeightService
     {
         _weightRepo = weightRepo;
     }
-    public async Task<List<WeightEntry>?> GetWeights()
+    public async Task<List<WeightEntryDTO>?> GetWeights()
     {
         List<WeightEntry>? entries = await _weightRepo.GetWeightEntries();
+        List<WeightEntryDTO> entriesDTOs = new List<WeightEntryDTO>();
         if (entries == null)
         {
             return null;
         }
-        return entries;
+        //Convert to DTOs
+        foreach (WeightEntry entry in entries)
+        {
+            entriesDTOs.Add(new WeightEntryDTO(entry.Weight, entry.Date, entry.Comment));
+        }
+        return entriesDTOs;
     }
     public Task<WeightEntry> GetWeightById(int id)
     {

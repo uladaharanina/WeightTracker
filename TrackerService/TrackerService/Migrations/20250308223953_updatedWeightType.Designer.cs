@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrackerService.Data;
 
@@ -11,9 +12,11 @@ using TrackerService.Data;
 namespace TrackerService.Migrations
 {
     [DbContext(typeof(WeightContext))]
-    partial class WeightContextModelSnapshot : ModelSnapshot
+    [Migration("20250308223953_updatedWeightType")]
+    partial class updatedWeightType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
