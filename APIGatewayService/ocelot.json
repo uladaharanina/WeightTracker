@@ -1,0 +1,33 @@
+{
+    
+    "Routes": [
+      {      "DownstreamPathTemplate": "/api/ReportService/{all}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5034
+        }
+      ],
+        "UpstreamPathTemplate": "/api/ReportService/{all}",
+        "UpstreamHttpMethod": [ "GET" ]
+      },
+      {
+        "UpstreamPathTemplate": "/api/TrackerService/{all}",
+        "UpstreamHttpMethod": [ "GET", "POST" ],
+        "DownstreamPathTemplate": "/api/TrackerService/{all}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 8080
+          }
+        ]
+      }
+    ],
+    "GlobalConfiguration": {
+      "BaseUrl": "http://localhost:5204"
+    }
+  }
+  
+  

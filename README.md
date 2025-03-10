@@ -38,10 +38,10 @@ The application is built using **Microservices Architecture**, with two main mic
   - Entity Framework Core for database interactions.
   - RESTful APIs for communication between microservices.
 - **Database**:
-  - SQL Server (or any database you prefer) for storing weight records.
+  - SQL Server for storing weight records.
 - **Other Tools**:
-  - Docker (for containerization, optional).
-  - Kubernetes (for deployment, optional).
+  - Docker
+  - Ocelot for API Gateway
 - **Microservices Communication**:
   - RESTful API for communication between the Tracker and Report services.
 
@@ -52,5 +52,5 @@ The application is built using **Microservices Architecture**, with two main mic
 ### Prerequisites
 
 - .NET Core SDK
-- Docker (optional, for containerization)
-- SQL Server or another relational database (for storing data)
+- Docker
+- SQL Server
