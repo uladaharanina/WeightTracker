@@ -32,7 +32,7 @@ jobs:
         run: dotnet restore APIGatewayService/APIGatewayService.csproj
 
       - name: Build TrackerService
-        run: dotnet build TrackerService/TrackerService.TrackerService.csproj --no-restore
+        run: dotnet build TrackerService/TrackerService/TrackerService.csproj --no-restore
 
       - name: Build ReportService
         run: dotnet build ReportService/ReportService.csproj --no-restore
