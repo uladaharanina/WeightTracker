@@ -41,6 +41,7 @@ The application is built using **Microservices Architecture**, with two main mic
   - SQL Server for storing weight records.
 - **Other Tools**:
   - Docker
+  - Ocelot for API Gateway
 - **Microservices Communication**:
   - RESTful API for communication between the Tracker and Report services.
 
