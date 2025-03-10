@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
+[Route("api/ReportService")]
 public class ReportController : ControllerBase
 {
     private IReportService _service;
@@ -8,8 +9,7 @@ public class ReportController : ControllerBase
         _service = service;
     }
 
-    [HttpGet]
-    [Route("api/GenerateWeeklyReport")]
+    [HttpGet("GenerateWeeklyReport")]
     public async Task<IActionResult> GetWeeklyReport()
     {
         //Request data
@@ -25,7 +25,7 @@ public class ReportController : ControllerBase
     }
 
     [HttpGet]
-    [Route("api/GenerateMontlyReport")]
+    [Route("GenerateMontlyReport")]
     public IActionResult GetMonthlyReport()
     {
         return StatusCode(200);

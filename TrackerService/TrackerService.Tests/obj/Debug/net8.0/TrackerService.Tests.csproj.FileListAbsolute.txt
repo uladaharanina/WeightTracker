@@ -193,3 +193,4 @@ C:\dev\WeightTracker\TrackerService\TrackerService.Tests\obj\Debug\net8.0\refint
 C:\dev\WeightTracker\TrackerService\TrackerService.Tests\obj\Debug\net8.0\TrackerService.Tests.pdb
 C:\dev\WeightTracker\TrackerService\TrackerService.Tests\obj\Debug\net8.0\TrackerService.Tests.genruntimeconfig.cache
 C:\dev\WeightTracker\TrackerService\TrackerService.Tests\obj\Debug\net8.0\ref\TrackerService.Tests.dll
+C:\dev\WeightTracker\TrackerService\TrackerService.Tests\bin\Debug\net8.0\RabbitMQ.Client.dll

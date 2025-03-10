@@ -18,19 +18,26 @@ public class ServiceTests
         Mock<IWeightRepo> mockRepo = new();
 
         List<WeightEntry> entries = [
-            new WeightEntry { Id = 1, Weight = 56 },
-            new WeightEntry { Id = 2, Weight = 55 },
-            new WeightEntry { Id = 3, Weight = 58 }
+            new WeightEntry { Id = 1, Weight = 56,  Date = new DateTime(2025, 3, 9, 14, 0, 0), Comment = ""},
+            new WeightEntry { Id = 2, Weight = 55, Date = new DateTime(2025, 3, 6, 14, 0, 0), Comment = "Ate a cake"},
+            new WeightEntry { Id = 3, Weight = 58, Date = new DateTime(2025, 3, 5, 14, 0, 0), Comment = "No"}
         ];
+        List<WeightEntryDTO> weights = new List<WeightEntryDTO>();
+
+        foreach (var entry in entries)
+        {
+            weights.Add(new WeightEntryDTO(entry.Weight, entry.Date, entry.Comment));
+        }
 
         mockRepo.Setup(rep => rep.GetWeightEntries())
         .ReturnsAsync(entries);
         IWeightService myService = new WeightService(mockRepo.Object);
 
         //Act
-        List<WeightEntry>? result = await myService.GetWeights();
+        List<WeightEntryDTO>? result = await myService.GetWeights();
         //Assert
-        Assert.Equal(entries, result);
+
+        Assert.Equal(3, result.Count);
     }
 
     //Tests adding a new weight

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TrackerService.Interfaces;
 using TrackerService.Models;
 
+[Route("api/TrackerService")]
 public class TrackerController : ControllerBase
 {
 
@@ -14,7 +15,7 @@ public class TrackerController : ControllerBase
         _weightService = weightService;
     }
     [HttpGet]
-    [Route("api/weights")]
+    [Route("ListWeights")]
     public async Task<ActionResult<List<WeightEntryDTO?>>> GetWeights()
     {
         try
@@ -29,7 +30,7 @@ public class TrackerController : ControllerBase
     }
 
     [HttpPost]
-    [Route("api/Addweights")]
+    [Route("AddWeights")]
     public async Task<ActionResult<WeightEntry>> AddWeight([FromBody] WeightEntry entry)
     {
         try

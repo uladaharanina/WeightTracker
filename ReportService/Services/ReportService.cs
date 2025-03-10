@@ -9,7 +9,7 @@ public class ReportService : IReportService
 
     public async Task<WeeklyReportDTO> GenerateWeeklyReport()
     {
-        var response = await _httpClient.GetAsync("http://localhost:8080/api/weights");
+        var response = await _httpClient.GetAsync("http://localhost:8080/api/TrackerService/ListWeights");
         response.EnsureSuccessStatusCode();
         List<WeightEntryDTO>? allENtries = await response.Content.ReadFromJsonAsync<List<WeightEntryDTO>>();
         if (allENtries == null)
