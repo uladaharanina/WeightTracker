@@ -23,7 +23,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies for TrackerService
-        run: dotnet restore TrackerService/TrackerService.TrackerService.csproj
+        run: dotnet restore TrackerService/TrackerService/TrackerService.csproj
 
       - name: Restore dependencies for ReportService
         run: dotnet restore ReportService/ReportService.csproj
