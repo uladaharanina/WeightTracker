@@ -8,6 +8,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<IRabbitMQConnection, RabbitMQConnection>();
+builder.Services.AddSingleton<RabbitMQConsumerService>();
+builder.Services.AddHostedService<ConsumerBackgroundService>();
+
+//builder.Services.AddScoped<IMessageTrackerProducerConsumer, TrackerProducerConsumer>();
+builder.Services.AddScoped<IWeightService, WeightService>();
+builder.Services.AddScoped<IWeightRepo, WeightRepo>();
+
 var connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
 var localConnectionString = builder.Configuration.GetConnectionString("ConnectionString");
 
@@ -17,14 +25,8 @@ builder.Services.AddDbContext<WeightContext>(options =>
     options.UseSqlServer(connectionString);
 });
 
-builder.Services.AddScoped<IWeightRepo, WeightRepo>();
-builder.Services.AddScoped<IWeightService, WeightService>();
-
-
 var app = builder.Build();
 
-
-//Use Swagger to display API
 
 if (app.Environment.IsDevelopment())
 {

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("api/ReportService")]
@@ -26,8 +27,16 @@ public class ReportController : ControllerBase
 
     [HttpGet]
     [Route("GenerateMontlyReport")]
-    public IActionResult GetMonthlyReport()
+    public async Task<IActionResult> GetMonthlyReport()
     {
-        return StatusCode(200);
+        try
+        {
+            await _service.GenerateMonthlyReport();
+            return Ok("send");
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
     }
 }
