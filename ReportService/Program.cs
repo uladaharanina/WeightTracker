@@ -3,7 +3,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<IReportService, ReportService>();
+
+builder.Services.AddTransient<IReportService, ReportService>();
+builder.Services.AddSingleton<IRabbitMQConnection, RabbitMQConnection>();
+builder.Services.AddSingleton<IMessageHandler, MessageHandler>();
+
+builder.Services.AddHostedService<ConsumerBackgroundService>();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

@@ -1,10 +1,15 @@
 
+using Microsoft.AspNetCore.Http.HttpResults;
+
 public class ReportService : IReportService
 {
     private readonly HttpClient _httpClient;
-    public ReportService(HttpClient httpClient)
+    private readonly IMessageHandler _messageHandler;
+    public ReportService(HttpClient httpClient, IMessageHandler messageHandler)
     {
         _httpClient = httpClient;
+        _messageHandler = messageHandler;
+
     }
 
     public async Task<WeeklyReportDTO> GenerateWeeklyReport()
@@ -37,9 +42,21 @@ public class ReportService : IReportService
         }
     }
 
-    public Task<MonthlyReportDTO> GenerateMonthlyReport()
+    public async Task GenerateMonthlyReport()
     {
-        throw new NotImplementedException("Currently Working on it!");
+        // Send Message
+        _messageHandler.SendMessage("Request for MonthlyReport");
+        //var reportData = await _consumer.ConsumeMessage()
+        /*
+        try
+        {
+            MonthlyReportDTO getReport = WeightCalculator.GetMonthlyReportDTOs(reportData);
+            return getReport;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error generating monthly report: " + ex.Message);
+        }*/
     }
 }
 

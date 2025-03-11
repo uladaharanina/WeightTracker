@@ -4,6 +4,7 @@ using TrackerService.Interfaces;
 public class WeightService : IWeightService
 {
     private readonly IWeightRepo _weightRepo;
+    //private readonly IMessageProducer _messageProducer;
 
     public WeightService(IWeightRepo weightRepo)
     {
