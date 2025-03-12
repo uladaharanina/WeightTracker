@@ -35,6 +35,6 @@ public static class WeightCalculator
         {
             sum += entry.Weight;
         }
-        return sum / entries.Count;
+        return Math.Round(sum / entries.Count, 2);
     }
 }

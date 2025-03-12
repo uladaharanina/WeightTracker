@@ -22,7 +22,7 @@ var localConnectionString = builder.Configuration.GetConnectionString("Connectio
 builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddDbContext<WeightContext>(options =>
 {
-    options.UseSqlServer(connectionString);
+    options.UseSqlServer(localConnectionString);
 });
 
 var app = builder.Build();
