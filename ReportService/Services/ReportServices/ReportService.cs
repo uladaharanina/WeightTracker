@@ -1,4 +1,5 @@
 
+using System.Text.Json;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 public class ReportService : IReportService
@@ -42,21 +43,30 @@ public class ReportService : IReportService
         }
     }
 
-    public async Task GenerateMonthlyReport()
+    public async Task<MonthlyReportDTO> GenerateMonthlyReport()
     {
-        // Send Message
-        _messageHandler.SendMessage("Request for MonthlyReport");
-        //var reportData = await _consumer.ConsumeMessage()
-        /*
-        try
-        {
-            MonthlyReportDTO getReport = WeightCalculator.GetMonthlyReportDTOs(reportData);
-            return getReport;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception("Error generating monthly report: " + ex.Message);
-        }*/
+        List<WeightEntryDTO>? entries = new();
+        var tcs = new TaskCompletionSource<List<WeightEntryDTO>>();
+
+        _messageHandler.SendMessage("Request for MonthlyReport", (response) =>
+       {
+
+           List<WeightEntryDTO>? responseEntries = JsonSerializer.Deserialize<List<WeightEntryDTO>>(response);
+           // If response entries are valid, set the result on the TaskCompletionSource
+           if (responseEntries != null)
+           {
+               tcs.SetResult(responseEntries);
+           }
+           else
+           {
+               tcs.SetException(new Exception("Failed to deserialize response"));
+           }
+       });
+        entries = await tcs.Task;
+        return WeightCalculator.GetMonthlyReportDTOs(entries);
+
+
+
     }
 }
 

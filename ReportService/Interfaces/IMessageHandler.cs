@@ -1,7 +1,7 @@
 public interface IMessageHandler
 {
 
-    void SendMessage<T>(T message);
+    void SendMessage<T>(T message, Action<string> callback);
     void StartConsuming();
 
 }

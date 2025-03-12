@@ -31,8 +31,8 @@ public class ReportController : ControllerBase
     {
         try
         {
-            await _service.GenerateMonthlyReport();
-            return Ok("send");
+            MonthlyReportDTO report = await _service.GenerateMonthlyReport();
+            return Ok(report);
         }
         catch (Exception e)
         {
